@@ -1,0 +1,145 @@
+---
+swagger: "2.0"
+info:
+  description: "API for Liberty Rider ( by Lechopier Vincent )"
+  version: "1.0.0"
+  title: "API"
+  termsOfService: "localhost/CGU/"
+host: "localhost"
+basePath: "/"
+tags:
+- name: "user"
+  description: "Website user"
+schemes:
+- "http"
+consumes:
+- "application/xml"
+produces:
+- "application/xml"
+security:
+- ApiKeyAuth: []
+paths:
+  /:
+    get:
+      tags:
+      - "user"
+      summary: "average age of last race pilots"
+      description: "get the average of last race driver's age"
+      operationId: "getAvg"
+      parameters: []
+      responses:
+        200:
+          description: "avegage age"
+          schema:
+            type: "number"
+            format: "float"
+      x-swagger-router-controller: "User"
+  /users:
+    get:
+      tags:
+      - "user"
+      summary: "get all users"
+      description: "return an array containing all users"
+      operationId: "getAll"
+      parameters: []
+      responses:
+        200:
+          description: "Array of filtered users"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+      x-swagger-router-controller: "User"
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: "create a User"
+      description: "create a user from a user object, ignore id"
+      operationId: "createUser"
+      parameters:
+      - in: "body"
+        name: "user"
+        description: "user to create"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "created user"
+          schema:
+            $ref: "#/definitions/User"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "user"
+      summary: "update a User"
+      description: "update a user from a user object, use id"
+      operationId: "updateUser"
+      parameters:
+      - in: "body"
+        name: "user"
+        description: "user to update"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "updated user"
+          schema:
+            $ref: "#/definitions/User"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "user"
+      summary: "delete a User"
+      description: "delete a user from an id"
+      operationId: "deleteUser"
+      parameters:
+      - in: "body"
+        name: "id"
+        description: "id of user to delete"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        200:
+          description: "user deleted"
+          schema:
+            type: "boolean"
+      x-swagger-router-controller: "User"
+  /user/{user_id}:
+    get:
+      tags:
+      - "user"
+      summary: "get single user"
+      description: "return one user by the id"
+      operationId: "getUser"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "id of required user"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "requested user"
+          schema:
+            $ref: "#/definitions/User"
+      x-swagger-router-controller: "User"
+securityDefinitions:
+  ApiKeyAuth:
+    type: "apiKey"
+    name: "X-API-Key"
+    in: "header"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id_user:
+        type: "integer"
+      name:
+        type: "string"
+      lastname:
+        type: "string"
+    description: "Website user"
