@@ -15,8 +15,8 @@
   "dependencies": {
     "connect": "^3.2.0",
     "js-yaml": "^3.3.0",
-    "mysql": "^2.14.1",
     "request": "^2.82.0",
+    "sqlite": "^2.8.0",
     "swagger-tools": "0.10.1",
     "xml2js": "^0.4.19"
   }

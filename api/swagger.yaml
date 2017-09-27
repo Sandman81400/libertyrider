@@ -14,8 +14,10 @@ schemes:
 - "http"
 consumes:
 - "application/xml"
+- "application/json"
 produces:
 - "application/xml"
+- "application/json"
 security:
 - ApiKeyAuth: []
 paths:
